@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    background-image: url("../images/signin.png");
+    background-color: lightgray 50%;
+    background-size: cover;
+}
