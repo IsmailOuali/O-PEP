@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url("../images/login.png");
+    background-color: lightgray 50%;
+    background-size: cover;
+}
+
+.nav-countainer{
+    width: 100%;
+    height: 6em;
+    background-color: rgba(18, 13, 14, 0.792);
+}
+
+
+.body-countainer{
+    width: 50%;
+    height: 40em;
+    background-color: #15292095;
+}
+
+.title{
+    text-align: center;
+    color: white;
+    font-size: 128px;
+    color: #FFF;
+    font-weight: 400;
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+
+.form-countainer{
+    width: 15em;
+    display: flex;
+    flex-direction: column;
+    font-size: 32px;
+    padding-left: 4em;
+    gap: 32px;
+}
+
+.form-countainer input{
+    height: 2em;
+    border-radius: 20px;
+    font-size: 32px;
+    border: none;
+
+}
+
+.form-countainer button{
+    width: 4em;
+    font-size: 32px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #152920;
+}
