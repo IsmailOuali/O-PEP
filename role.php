@@ -8,8 +8,9 @@
     <title>Roles</title>
 </head>
 <body>
-    <div class="role-countainer pt-20 flex flex-col space-y-4">
+    <div class="role-countainer pt-20 pr-20 mr-20 flex flex-col space-y-4 space-x-10">
 
+    <p class="space-x-10   "> Choose a role:</p>
     <button id="clientBtn" class="w-3/5  mt-10 h-12 px-6 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">
         Sign up as Client
     </button>
@@ -27,7 +28,7 @@
         document.getElementById("clientBtn").addEventListener("click", redirectClient);
         
         function redirectAdmin(){ 
-        window.location = "http://localhost/O-PEP/admin.php"
+        window.location = "http://localhost/O-PEP/nav-admin.php"
         };
         document.getElementById("AdminBtn").addEventListener("click", redirectAdmin);
     </script>
