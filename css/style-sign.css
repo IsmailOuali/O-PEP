@@ -9,3 +9,11 @@ body{
     background-color: lightgray 50%;
     background-size: cover;
 }
+
+.sign-countainer{
+    border: solid black;
+}
+
+.side{
+    display: flex;
+}
