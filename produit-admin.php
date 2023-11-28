@@ -7,9 +7,12 @@ if (@$_POST['Addproduct']) {
     $Taille = $_POST['taille'];
     $Temperature = $_POST['temperature'];
     $Prix = $_POST['prix'];
+    
+    $Select = $_POST['select'];
 
-    $sql = "INSERT into plante (nom, origine, taille, Température, prix) values('$Pname', '$Origin', '$Taille', '$Temperature', $Prix)";
+    $sql = "INSERT into plante (nom, origine, taille, Température, prix, id_cat) values('$Pname', '$Origin', '$Taille', '$Temperature', $Prix, '$Select')";
     $req = mysqli_query($conn, $sql);
+    $Allrows = mysqli_fetch_row($req);
 
 
 
@@ -69,22 +72,19 @@ if (@$_POST['Addproduct']) {
                 <div>
                     <label for="category"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                    <select id="category"
+                    <select name="select" id="category"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <option selected="">Select category</option>
                         <?php
-                        $sqlCtg = 'SELECT * from categorie';
+                        $sqlCtg = "SELECT * from categorie";
                         $reqCtg = mysqli_query($conn, $sqlCtg);
                         while ($row = mysqli_fetch_row($reqCtg)) {
                             ?>
                             <option value="<?php echo $row['0'] ?>">
                                 <?php echo $row['1'] ?>
                             </option>
-
-
                             <?php
-                        }
-                        ?>
+                        }?>
                     </select>
                 </div>
             </div>
@@ -119,7 +119,9 @@ if (@$_POST['Addproduct']) {
                 </thead>
                 <tbody>
 
-
+                        <?php
+                        
+                        ?>
 
                     <tr
                         class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
