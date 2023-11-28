@@ -1,21 +1,29 @@
 CREATE DATABASE opep CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE utilisateur
+-- CREATE TABLE utilisateur
+-- (
+--    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+--     nom VARCHAR(100),
+--     prenom VARCHAR(100),
+--     email VARCHAR(255),
+--     pass VARCHAR(255),
+--     FOREIGN KEY(id_role) REFERENCES role (id)
+-- )
+
+CREATE TABLE users
 (
-   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    nom VARCHAR(100),
-    prenom VARCHAR(100),
-    email VARCHAR(255),
-    pass VARCHAR(255)
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Fullname VARCHAR(50),
+    Username VARCHAR(50),
+    Email VARCHAR(50),
+    Pwd VARCHAR(100),
+    FOREIGN KEY(id_role) REFERENCES role (id)
 )
 
 CREATE TABLE role
 (
    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    rl VARCHAR(50),
-    id_user int,
-    FOREIGN KEY (id_user) REFERENCES utilisateur (id)
-
+    rl VARCHAR(50)
 )
 
 
@@ -106,3 +114,4 @@ VALUES
 
 
 SELECT * FROM plante;
+
