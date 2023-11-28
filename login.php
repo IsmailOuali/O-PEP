@@ -1,11 +1,25 @@
-<?php 
-    include 'config.php';
+<?php
+include 'config.php';
+session_start();
 
+if (@$_POST['Loginbtn']) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = '';
+    $sql = "SELECT * from users WHERE Email = '$email' AND Pwd = '$password'";
+    $req = mysqli_query($conn, $sql);
+    $log = mysqli_fetch_row($req);
 
+    if ($log == 0) {
+        echo "Email ou mot de passe incorecte";
+    } else {
+        if ($log['5'] == 1) {
+            header('Location: client.php');
+        } else if ($log['5'] == 2) {
+            header('Location: nav-admin.php');
+        }
+    }
+}
 
 ?>
 
@@ -48,7 +62,8 @@
                                     class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
                     </div>
                     <div class="flex items-baseline justify-between">
-                        <input type="submit" value="Login" class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
+                        <input type="submit" value="Login" name="Loginbtn"
+                            class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
                     </div>
                 </div>
             </form>
