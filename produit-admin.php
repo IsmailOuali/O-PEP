@@ -1,3 +1,20 @@
+<?php
+    include 'config.php';
+
+    if(@$_POST['Addproduct']){
+        $Pname = $_POST['name'];
+        $Origin = $_POST['origine'];
+        $Taille = $_POST['taille'];
+        $Temperature = $_POST['temperature'];
+        $Prix = $_POST['prix'];
+
+        $sql = "INSERT into plante (nom, origine, taille, Température, prix) values('$Pname', '$Origin', '$Taille', '$Temperature', $Prix)";
+        $req = mysqli_query($conn, $sql);
+
+        $sql = "SELECT ";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,10 +27,59 @@
 
 <body>
     <div class="countainer pt-10 flex flex-col items-center justify-center">
-        <a
-            class="w-3/5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-            Ajouter Un produit
-        </a>
+        <form action="#" method="post">
+            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                <div class="sm:col-span-2">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Plante
+                        Name</label>
+                    <input type="text" name="name" id="name"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Type product name" required="">
+                </div>
+                <div class="w-full">
+                    <label for="brand"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Taille(cm)</label>
+                    <input type="text" name="taille" id="brand"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Product brand" required="">
+                </div>
+                <div class="w-full">
+                    <label for="brand"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Origin</label>
+                    <input type="text" name="origine" id="brand"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Origin" required="">
+                </div>
+                <div class="w-full">
+                    <label for="brand"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Temperature(°C)</label>
+                    <input type="text" name="temperature" id="brand"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Product brand" required="">
+                </div>
+                <div class="w-full">
+                    <label for="price"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                    <input type="number" name="prix" id="price"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="$2999" required="">
+                </div>
+                <div>
+                    <label for="category"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                    <select id="category"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <option selected="">Select category</option>
+                        <option value="1">Décoration</option>
+                        <option value="2">Médicinale</option>
+                        <option value="3">Agricole</option>
+                    </select>
+                </div>
+            </div>
+            <div class="btn m-5">
+                <input type="submit" name="Addproduct" value="Ajouter un produit" class="w-3/5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" value="Ajouter un produit">
+            </div>
+        </form>
 
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-10">
@@ -61,7 +127,7 @@
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>
                         </td>
                     </tr>
-                    
+
 
                 </tbody>
             </table>

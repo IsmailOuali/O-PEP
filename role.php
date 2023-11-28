@@ -3,7 +3,6 @@ include 'config.php';
 session_start();
 $id = $_SESSION['id'];
 
-echo $id;
 if (@$_POST['Cbtn']) {
     $sqlClient = "UPDATE users SET id_role = 1 where id = $id";
     $reqClient = mysqli_query($conn, $sqlClient);

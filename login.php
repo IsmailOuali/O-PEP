@@ -1,3 +1,14 @@
+<?php 
+    include 'config.php';
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = '';
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,19 +38,17 @@
                 <div class="mt-4">
                     <div>
                         <label class="block" for="email">Email<label>
-                                <input type="text" placeholder="Email"
+                                <input type="text" placeholder="Email" name="email"
                                     class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
                                 <span class="text-xs tracking-wide text-red-600">Email field is required </span>
                     </div>
                     <div class="mt-4">
                         <label class="block">Password<label>
-                                <input type="password" placeholder="Password"
+                                <input type="password" placeholder="Password" name="password"
                                     class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
                     </div>
                     <div class="flex items-baseline justify-between">
-                        <button class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
-                            Login
-                        </button>
+                        <input type="submit" value="Login" class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">
                     </div>
                 </div>
             </form>
