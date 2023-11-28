@@ -1,18 +1,20 @@
 <?php
-    include 'config.php';
+include 'config.php';
 
-    if(@$_POST['Addproduct']){
-        $Pname = $_POST['name'];
-        $Origin = $_POST['origine'];
-        $Taille = $_POST['taille'];
-        $Temperature = $_POST['temperature'];
-        $Prix = $_POST['prix'];
+if (@$_POST['Addproduct']) {
+    $Pname = $_POST['name'];
+    $Origin = $_POST['origine'];
+    $Taille = $_POST['taille'];
+    $Temperature = $_POST['temperature'];
+    $Prix = $_POST['prix'];
 
-        $sql = "INSERT into plante (nom, origine, taille, Température, prix) values('$Pname', '$Origin', '$Taille', '$Temperature', $Prix)";
-        $req = mysqli_query($conn, $sql);
+    $sql = "INSERT into plante (nom, origine, taille, Température, prix) values('$Pname', '$Origin', '$Taille', '$Temperature', $Prix)";
+    $req = mysqli_query($conn, $sql);
 
-        $sql = "SELECT ";
-    }
+
+
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -70,14 +72,26 @@
                     <select id="category"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <option selected="">Select category</option>
-                        <option value="1">Décoration</option>
-                        <option value="2">Médicinale</option>
-                        <option value="3">Agricole</option>
+                        <?php
+                        $sqlCtg = 'SELECT * from categorie';
+                        $reqCtg = mysqli_query($conn, $sqlCtg);
+                        while ($row = mysqli_fetch_row($reqCtg)) {
+                            ?>
+                            <option value="<?php echo $row['0'] ?>">
+                                <?php echo $row['1'] ?>
+                            </option>
+
+
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
             <div class="btn m-5">
-                <input type="submit" name="Addproduct" value="Ajouter un produit" class="w-3/5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" value="Ajouter un produit">
+                <input type="submit" name="Addproduct" value="Ajouter un produit"
+                    class="w-3/5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    value="Ajouter un produit">
             </div>
         </form>
 
