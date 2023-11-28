@@ -7,15 +7,13 @@ if (@$_POST['Addproduct']) {
     $Taille = $_POST['taille'];
     $Temperature = $_POST['temperature'];
     $Prix = $_POST['prix'];
-    
+
     $Select = $_POST['select'];
 
     $sql = "INSERT into plante (nom, origine, taille, Température, prix, id_cat) values('$Pname', '$Origin', '$Taille', '$Temperature', $Prix, '$Select')";
     $req = mysqli_query($conn, $sql);
-    $Allrows = mysqli_fetch_row($req);
 
-
-
+    header('Location: produit-admin.php');
 
 }
 ?>
@@ -84,7 +82,7 @@ if (@$_POST['Addproduct']) {
                                 <?php echo $row['1'] ?>
                             </option>
                             <?php
-                        }?>
+                        } ?>
                     </select>
                 </div>
             </div>
@@ -101,50 +99,73 @@ if (@$_POST['Addproduct']) {
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Product name
+                            Plante name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Color
+                            origine
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Category
+                            Taille(cm)
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Temperature (°C)
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Price
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Category
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Actions
                         </th>
                     </tr>
                 </thead>
                 <tbody>
 
-                        <?php
-                        
+                    <?php
+                    $sqlshow = 'SELECT * from plante JOIN categorie where plante.id_cat = categorie.id';
+                    $reqshow = mysqli_query($conn, $sqlshow);
+                    $result = mysqli_fetch_row($reqshow);
+
+                    while ($result = mysqli_fetch_row($reqshow)) {
+
                         ?>
+                        <tr
+                            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <?php echo $result['1'] ?>
+                            </th>
+                            <td class="px-6 py-4">
+                                <?php echo $result['2'] ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <?php echo $result['3'] ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <?php echo $result['4'] ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <?php echo $result['5'] ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <?php echo $result['8'] ?>
+                            </td>
 
-                    <tr
-                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple MacBook Pro 17"
-                        </th>
-                        <td class="px-6 py-4">
-                            Silver
-                        </td>
-                        <td class="px-6 py-4">
-                            Laptop
-                        </td>
-                        <td class="px-6 py-4">
-                            $2999
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            |
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>
-                        </td>
-                    </tr>
+                            <td class="px-6 py-4">
+                                <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                    href="sup.php?id=<?php echo $result['0'] ?>">supprimer</a>
+                                    |
+                                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                        href="">Edit</a>
+                                </form>
+                            </td>
+                        </tr>
+
+                    <?php }
 
 
+                    ?>
                 </tbody>
             </table>
         </div>
