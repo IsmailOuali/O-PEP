@@ -126,7 +126,7 @@ if (@$_POST['Addproduct']) {
                     <?php
                     $sqlshow = 'SELECT * from plante JOIN categorie where plante.id_cat = categorie.id';
                     $reqshow = mysqli_query($conn, $sqlshow);
-                    $result = mysqli_fetch_row($reqshow);
+                        
 
                     while ($result = mysqli_fetch_row($reqshow)) {
 
@@ -153,12 +153,10 @@ if (@$_POST['Addproduct']) {
                             </td>
 
                             <td class="px-6 py-4">
+                                |
                                 <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                     href="sup.php?id=<?php echo $result['0'] ?>">supprimer</a>
-                                    |
-                                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                        href="">Edit</a>
-                                </form>
+                                |
                             </td>
                         </tr>
 

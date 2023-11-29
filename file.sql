@@ -47,6 +47,12 @@ CREATE TABLE plante
     FOREIGN KEY (id_cat) REFERENCES categorie (id)
 )
 
+CREATE TABLE panier(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    id_user int,
+    FOREIGN KEY (id_user) REFERENCES users(id)
+) 
+
 
 
 

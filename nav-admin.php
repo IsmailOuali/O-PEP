@@ -1,3 +1,7 @@
+i
+<?php
+include 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +54,7 @@
                     <span>Produits</span>
                 </a>
 
-                <a href="#"
+                <a href="categorie-admin.php"
                     class="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600">
                     <span class="text-2xl"><i class="bx bx-heart"></i></span>
                     <span>Categories</span>
@@ -64,12 +68,25 @@
             </aside>
 
             <!-- main content page -->
-            <div class="w-full p-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita quam odit
-                officiis
-                magni doloribus ipsa dolore, dolores nihil accusantium labore, incidunt autem iure quae vitae voluptate,
-                esse asperiores aliquam repellat. Harum aliquid non officiis porro at cumque eaque inventore iure. Modi
-                sunt
-                optio mollitia repellat sed ab quibusdam quos harum!</div>
+            <div class="w-full p-4">
+                <?php
+                $sqlcount = "SELECT COUNT(*) as total FROM users";
+                $reqcount = mysqli_query($conn, $sqlcount);
+
+                $total = mysqli_fetch_assoc($reqcount);
+                ?>
+                <div class="nbrclient ">
+                    <p>Nombre de client:</p><br>
+                    <p><?php echo $total['total'] ?></p>
+
+                </div>
+
+
+
+
+
+
+            </div>
         </div>
     </main>
 
