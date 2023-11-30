@@ -77,7 +77,24 @@ include 'config.php';
                 ?>
                 <div class="nbrclient ">
                     <p>Nombre de client:</p><br>
-                    <p><?php echo $total['total'] ?></p>
+                    <p>
+                        <?php echo $total['total'] ?>
+                    </p>
+
+                </div>
+                <div class="nbrplantes">
+
+                    <?php
+                    $sqlcountp = "SELECT COUNT(*) as totalp FROM plante";
+                    $reqcountp = mysqli_query($conn, $sqlcountp);
+
+                    $totalp = mysqli_fetch_assoc($reqcountp);
+
+                    ?>
+                    <p>Nombre de plantes:</p><br>
+                    <p>
+                        <?php echo $totalp['totalp'] ?>
+                    </p>
 
                 </div>
 
