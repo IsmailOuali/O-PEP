@@ -69,7 +69,7 @@ $resultstore = mysqli_query($conn, $sqlstore);
                             panier
                         </div>
 
-                    <?php
+                        <?php
                     }
                     ?>
                 </form>
@@ -93,8 +93,14 @@ $resultstore = mysqli_query($conn, $sqlstore);
                     <div class="bg-lime-600 flex items-center" id="store-nav-content">
 
                         <form action="" method="post">
-                            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="text" name="searchinput">
-                            <input type="submit" name="search" value="search">
+                            <div class="flex">
+                                <input
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    type="text" name="searchinput" placeholder="Entrer un nom">
+                                <input
+                                    class="text-white bg-green-700 hover:bg-green-800 rounded-full text-sm px-5 py-2.5 text-center"
+                                    type="submit" name="Search" value="search">
+                            </div>
                             <a class="pl-3 inline-block no-underline hover:text-black" href="#">
                                 <select name="select" id="category"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -116,7 +122,9 @@ $resultstore = mysqli_query($conn, $sqlstore);
                                 </select>
                             </a>
 
-                            <input type="submit" value="Search" name="filter">
+                            <input
+                                class="text-white bg-green-700 hover:bg-green-800 rounded-full text-sm px-5 py-2.5 text-center"
+                                type="submit" value="Search" name="filter">
                         </form>
 
                     </div>
@@ -134,7 +142,7 @@ $resultstore = mysqli_query($conn, $sqlstore);
 
                 while ($showcat = mysqli_fetch_assoc($reqshowcat)) {
                     ?>
-                    <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+                    <div class="w-3/5 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                         <a href="#">
                             <img class="w-full hover:grow hover:shadow-lg" src="images/<?php echo $showcat['img'] ?>">
                             <div class="pt-3 flex items-center justify-between">
@@ -144,61 +152,68 @@ $resultstore = mysqli_query($conn, $sqlstore);
                                 <p class="pt-1 text-gray-900">$
                                     <?php echo $showcat['Prix'] ?>
                                 </p>
+                                <input
+                                    class="w-full text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"
+                                    type="submit" name="ajoutpanier" value="Ajouter a votre panier">
                         </a>
                     </div>
                     <?php
                 }
 
 
-            }
-            else if(@$_POST['search']){
+            } else if (@$_POST['search']) {
                 $input = $_POST['searchinput'];
                 $sql = "SELECT * from plante where nom like '%$input%'";
                 $reqsearch = mysqli_query($conn, $sql);
                 if (!$reqsearch) {
-                   die;
+                    die;
                 }
                 while ($result = mysqli_fetch_row($reqsearch)) {
                     ?>
-                    <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                        <a href="#">
-                            <img class="w-full hover:grow hover:shadow-lg" src="images/<?php echo $result['7'] ?>">
-                            <div class="pt-3 flex items-center justify-between">
-                                <p class="">
-                                    <?php echo$result['1'] ?>
+                        <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+                            <a href="#">
+                                <img class="w-full hover:grow hover:shadow-lg" src="images/<?php echo $result['7'] ?>">
+                                <div class="pt-3 flex items-center justify-between">
+                                    <p class="">
+                                    <?php echo $result['1'] ?>
+                                    </p>
+                                </div>
+                                <p class="pt-1 text-gray-900">$
+                                <?php echo $result['5'] ?>
                                 </p>
-                            </div>
-                            <p class="pt-1 text-gray-900">$
-                                <?php echo$result['5'] ?>
-                            </p>
-                        </a>
-                    </div>
+                                <input
+                                    class="w-3/5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"
+                                    type="submit" name="ajoutpanier" value="Ajouter a votre panier">
+                            </a>
+                        </div>
                     <?php
                 }
 
-                }
-            
-            else {
+            } else {
 
                 while ($rowstore = mysqli_fetch_row($resultstore)) {
 
                     ?>
-                    <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                        <a href="#">
-                            <img class="w-full hover:grow hover:shadow-lg" src="images/<?php echo $rowstore['7'] ?>">
-                            <div class="pt-3 flex items-center justify-between">
-                                <p class="">
+                        <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+                            <a href="#">
+                                <img class="w-full hover:grow hover:shadow-lg" src="images/<?php echo $rowstore['7'] ?>">
+                                <div class="pt-3 flex items-center justify-between">
+                                    <p class="">
                                     <?php echo $rowstore['1'] ?>
-                                </p>
-                                <p>
+                                    </p>
+                                    <p>
                                     <?php echo $rowstore['9'] ?>
-                                </p>
-                            </div>
-                            <p class="pt-1 text-gray-900">$
+                                    </p>
+                                </div>
+                                <p class="pt-1 text-gray-900">$
                                 <?php echo $rowstore['5'] ?>
-                            </p>
-                        </a>
-                    </div>
+                                </p>
+                                <input
+                                    class="w-3/5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"
+                                    type="submit" name="ajoutpanier" value="Ajouter a votre panier">
+
+                            </a>
+                        </div>
                     <?php
                 }
 
