@@ -3,10 +3,9 @@ include 'config.php';
 $sqlstore = "SELECT * from plante JOIN categorie where plante.id_cat = categorie.id";
 $resultstore = mysqli_query($conn, $sqlstore);
 
-$sql2 = "SELECT * from ca"
 
 
-?>
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,11 +25,11 @@ $sql2 = "SELECT * from ca"
 
 </head>
 
-<body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
+<body class=" text-gray-600">
 
     <!--Nav-->
     <nav id="header" class="w-full z-30 top-0 py-1">
-        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
+        <div class="bg-lime-600 w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
 
             <label for="menu-toggle" class="cursor-pointer md:hidden block">
                 <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -75,7 +74,7 @@ $sql2 = "SELECT * from ca"
         </div>
     </nav>
 
-    <section class="bg-white py-8">
+    <section class=" py-8">
 
         <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
 
@@ -87,51 +86,90 @@ $sql2 = "SELECT * from ca"
                         Store
                     </a>
 
-                    <div class="flex items-center" id="store-nav-content">
+                    <div class="bg-lime-600 flex items-center" id="store-nav-content">
 
-                        <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                            <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24">
-                                <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
-                            </svg>
-                        </a>
+                        <form action="" method="post">
+                            <a class="pl-3 inline-block no-underline hover:text-black" href="#">
+                                <select name="select" id="category"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <option selected="">Select</option>
+                                    <?php
 
-                        <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                            <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24">
-                                <path
-                                    d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z" />
-                            </svg>
-                        </a>
+                                    $sqlCtg = "SELECT * from categorie";
+                                    $reqCtg = mysqli_query($conn, $sqlCtg);
+                                    while ($row = mysqli_fetch_row($reqCtg)) {
+                                        ?>
+                                        <option value="<?php echo $row['0'] ?>">
+                                            <?php echo $row['1'] ?>
+                                        </option>
+                                        <?php
+                                    }
+                                    
+                                    ?>
+                                    <option value="0">All</option>
+                                </select>
+                            </a>
+
+                            <input type="submit" value="Search" name="search">
+                        </form>
 
                     </div>
                 </div>
             </nav>
 
             <?php
+            if (@$_POST['search']) {
+                $catid = $_POST['select'];
+                $sqlshowcat = "SELECT * from plante where id_cat = $catid";
+                $reqshowcat = mysqli_query($conn, $sqlshowcat);
+                if (!$reqshowcat) {
+                    die('Error');
+                }
 
-
-            while ($rowstore = mysqli_fetch_row($resultstore)) {
-
-                ?>
-                <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                    <a href="#">
-                        <img class="hover:grow hover:shadow-lg"
-                            src="images/<?php echo $rowstore['7'] ?>">
-                        <div class="pt-3 flex items-center justify-between">
-                            <p class="">
-                                <?php echo $rowstore['1'] ?>
+                while ($showcat = mysqli_fetch_assoc($reqshowcat)) {
+                    ?>
+                    <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+                        <a href="#">
+                            <img class="w-full hover:grow hover:shadow-lg" src="images/<?php echo $showcat['img'] ?>">
+                            <div class="pt-3 flex items-center justify-between">
+                                <p class="">
+                                    <?php echo $showcat['nom'] ?>
+                                </p>
+                            <p class="pt-1 text-gray-900">$
+                                <?php echo $showcat['Prix'] ?>
                             </p>
-                            <p>
-                                <?php echo $rowstore['9'] ?>
+                            <p><?php echo $catid ?></p>
+                        </a>
+                    </div>
+                    <?php
+                }
+
+
+            } 
+            else{
+
+                while ($rowstore = mysqli_fetch_row($resultstore)) {
+                    
+                    ?>
+                    <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+                        <a href="#">
+                            <img class="w-full hover:grow hover:shadow-lg" src="images/<?php echo $rowstore['7'] ?>">
+                            <div class="pt-3 flex items-center justify-between">
+                                <p class="">
+                                    <?php echo $rowstore['1'] ?>
+                                </p>
+                                <p>
+                                    <?php echo $rowstore['9'] ?>
+                                </p>
+                            </div>
+                            <p class="pt-1 text-gray-900">$
+                                <?php echo $rowstore['5'] ?>
                             </p>
-                        </div>
-                        <p class="pt-1 text-gray-900">£
-                            <?php echo $rowstore['5'] ?>
-                        </p>
-                    </a>
-                </div>
-                <?php
+                        </a>
+                    </div>
+                    <?php
+                }
+            
             }
             ?>
 

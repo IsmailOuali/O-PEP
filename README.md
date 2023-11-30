@@ -1,6 +1,6 @@
 # O-PEP
 
-Presemtation :
+Presentation :
 
 https://www.canva.com/design/DAF1fquS2Ao/cIfGPTclYxcJiKKUkqRPNQ/edit
 
