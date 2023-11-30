@@ -7,10 +7,11 @@ if (@$_POST['Addproduct']) {
     $Taille = $_POST['taille'];
     $Temperature = $_POST['temperature'];
     $Prix = $_POST['prix'];
+    $img = $_POST['avatar'];
 
     $Select = $_POST['select'];
 
-    $sql = "INSERT into plante (nom, origine, taille, Température, prix, id_cat) values('$Pname', '$Origin', '$Taille', '$Temperature', $Prix, '$Select')";
+    $sql = "INSERT into plante (nom, origine, taille, Température, prix, id_cat, img) values('$Pname', '$Origin', '$Taille', '$Temperature', $Prix, '$Select', '$img')";
     $req = mysqli_query($conn, $sql);
 
     header('Location: produit-admin.php');
@@ -83,6 +84,11 @@ if (@$_POST['Addproduct']) {
                             </option>
                             <?php
                         } ?>
+                        <div>
+                            <label for="avatar" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">Choose a picture:</label>
+
+                            <input class="mt-2" type="file" id="avatar" name="avatar" accept="image/png, image/jpeg, image/jfif" />
+                        </div>
                     </select>
                 </div>
             </div>
@@ -126,7 +132,7 @@ if (@$_POST['Addproduct']) {
                     <?php
                     $sqlshow = 'SELECT * from plante JOIN categorie where plante.id_cat = categorie.id';
                     $reqshow = mysqli_query($conn, $sqlshow);
-                        
+
 
                     while ($result = mysqli_fetch_row($reqshow)) {
 

@@ -63,6 +63,11 @@ if (@$_POST['Addcategory']) {
                 <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <?php echo $rowcat['1']; ?>
                 </td>
+                <td class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    |
+                    <a href="sup-cat.php?id=<?php echo $rowcat['0'] ?>">Supprimer</a>
+                    |   
+                </td>
                 <?php
     }
     ?>

@@ -51,8 +51,19 @@ CREATE TABLE panier(
     id int PRIMARY KEY AUTO_INCREMENT,
     id_user int,
     FOREIGN KEY (id_user) REFERENCES users(id)
-) 
+)
 
+CREATE TABLE info 
+(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    id_user int,
+    id_p int,
+    quanite int,
+    FOREIGN KEY(id_user) REFERENCES users (id),
+    FOREIGN KEY(id_p) REFERENCES plante(id)
+)
+
+ALTER TABLE `plante` ADD `img` VARCHAR(255) NOT NULL AFTER `id_cat`;
 
 
 
