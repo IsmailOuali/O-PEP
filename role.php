@@ -1,11 +1,20 @@
 <?php
+
 include 'config.php';
 session_start();
+
 $id = $_SESSION['id'];
 
 if (@$_POST['Cbtn']) {
     $sqlClient = "UPDATE users SET id_role = 1 where id = $id";
     $reqClient = mysqli_query($conn, $sqlClient);
+    $sqladd = "INSERT into panier values(NULL, '$id')";
+    $reqadd = mysqli_query($conn, $sqladd);
+
+    $sqllst = "SELECT LAST_INSERT_ID()";
+    $reqlst = mysqli_query($conn, $sqllst);
+    $resultlst = mysqli_fetch_row($reqlst);
+    $_SESSION['panier'] = $resultlst[0];
     $_SESSION['status'] = 'client';
     header('Location: client.php');
     

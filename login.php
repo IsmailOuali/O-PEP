@@ -15,6 +15,13 @@ if (@$_POST['Loginbtn']) {
     } else {
         if ($log['5'] == 1) {
             header('Location: client.php');
+            $id = $log['0'];
+            $sql1 = "SELECT form panier where id_user = '$id'";
+            $req1 = mysqli_query($conn, $sql1);
+            $result = mysqli_fetch_row($req1);
+            $_SESSION['panier'] = $result[0];
+            $_SESSION['status'] = 'client';
+            $_SESSION['id'] = $id;
         } else if ($log['5'] == 2) {
             header('Location: nav-admin.php');
         }

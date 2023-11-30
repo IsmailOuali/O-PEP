@@ -63,6 +63,17 @@ CREATE TABLE info
     FOREIGN KEY(id_p) REFERENCES plante(id)
 )
 
+CREATE TABLE plante_panier
+(
+id int AUTO_INCREMENT,
+id_plante int,
+id_panier int,
+qtt int,
+ PRIMARY KEY(id),
+ FOREIGN KEY (id_plante) REFERENCES plante(id),
+FOREIGN KEY (id_panier) REFERENCES panier(id)
+)
+
 ALTER TABLE `plante` ADD `img` VARCHAR(255) NOT NULL AFTER `id_cat`;
 
 
