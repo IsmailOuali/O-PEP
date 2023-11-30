@@ -5,7 +5,7 @@ $resultstore = mysqli_query($conn, $sqlstore);
 
 
 
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,15 +60,19 @@ $resultstore = mysqli_query($conn, $sqlstore);
                     </svg>
                 </a>
 
-                <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                    <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M21,7H7.462L5.91,3.586C5.748,3.229,5.392,3,5,3H2v2h2.356L9.09,15.414C9.252,15.771,9.608,16,10,16h8 c0.4,0,0.762-0.238,0.919-0.606l3-7c0.133-0.309,0.101-0.663-0.084-0.944C21.649,7.169,21.336,7,21,7z M17.341,14h-6.697L8.371,9 h11.112L17.341,14z" />
-                        <circle cx="10.5" cy="18.5" r="1.5" />
-                        <circle cx="17.5" cy="18.5" r="1.5" />
-                    </svg>
-                </a>
+                <form action="" method="post">
+                    <input class="p-1" type="submit" value="panier" name="panier">
+                    <?php
+                    if (@$_POST['submitpanier']) {
+                        ?>
+                        <div class="w-3/5 panier-countainer">
+                            panier
+                        </div>
+
+                    <?php
+                    }
+                    ?>
+                </form>
 
             </div>
         </div>
@@ -89,10 +93,12 @@ $resultstore = mysqli_query($conn, $sqlstore);
                     <div class="bg-lime-600 flex items-center" id="store-nav-content">
 
                         <form action="" method="post">
+                            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" type="text" name="searchinput">
+                            <input type="submit" name="search" value="search">
                             <a class="pl-3 inline-block no-underline hover:text-black" href="#">
                                 <select name="select" id="category"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option selected="">Select</option>
+                                    Select
                                     <?php
 
                                     $sqlCtg = "SELECT * from categorie";
@@ -104,13 +110,13 @@ $resultstore = mysqli_query($conn, $sqlstore);
                                         </option>
                                         <?php
                                     }
-                                    
+
                                     ?>
                                     <option value="0">All</option>
                                 </select>
                             </a>
 
-                            <input type="submit" value="Search" name="search">
+                            <input type="submit" value="Search" name="filter">
                         </form>
 
                     </div>
@@ -118,7 +124,7 @@ $resultstore = mysqli_query($conn, $sqlstore);
             </nav>
 
             <?php
-            if (@$_POST['search']) {
+            if (@$_POST['filter']) {
                 $catid = $_POST['select'];
                 $sqlshowcat = "SELECT * from plante where id_cat = $catid";
                 $reqshowcat = mysqli_query($conn, $sqlshowcat);
@@ -135,21 +141,47 @@ $resultstore = mysqli_query($conn, $sqlstore);
                                 <p class="">
                                     <?php echo $showcat['nom'] ?>
                                 </p>
-                            <p class="pt-1 text-gray-900">$
-                                <?php echo $showcat['Prix'] ?>
-                            </p>
-                            <p><?php echo $catid ?></p>
+                                <p class="pt-1 text-gray-900">$
+                                    <?php echo $showcat['Prix'] ?>
+                                </p>
                         </a>
                     </div>
                     <?php
                 }
 
 
-            } 
-            else{
+            }
+            else if(@$_POST['search']){
+                $input = $_POST['searchinput'];
+                $sql = "SELECT * from plante where nom like '%$input%'";
+                $reqsearch = mysqli_query($conn, $sql);
+                if (!$reqsearch) {
+                   die;
+                }
+                while ($result = mysqli_fetch_row($reqsearch)) {
+                    ?>
+                    <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+                        <a href="#">
+                            <img class="w-full hover:grow hover:shadow-lg" src="images/<?php echo $result['7'] ?>">
+                            <div class="pt-3 flex items-center justify-between">
+                                <p class="">
+                                    <?php echo$result['1'] ?>
+                                </p>
+                            </div>
+                            <p class="pt-1 text-gray-900">$
+                                <?php echo$result['5'] ?>
+                            </p>
+                        </a>
+                    </div>
+                    <?php
+                }
+
+                }
+            
+            else {
 
                 while ($rowstore = mysqli_fetch_row($resultstore)) {
-                    
+
                     ?>
                     <div class="w-40 md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                         <a href="#">
@@ -169,7 +201,7 @@ $resultstore = mysqli_query($conn, $sqlstore);
                     </div>
                     <?php
                 }
-            
+
             }
             ?>
 
