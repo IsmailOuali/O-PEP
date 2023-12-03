@@ -24,7 +24,7 @@ $req = mysqli_query($conn, $sql);
 
 <body>
 
-    <nav id="header" class="w-full z-30 top-0 py-1">
+    <nav id="header" class="w-full top-0">
         <div class="bg-lime-600 w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
 
             <label for="menu-toggle" class="cursor-pointer md:hidden block">
@@ -54,9 +54,9 @@ $req = mysqli_query($conn, $sql);
             </div>
     </nav>
     <section>
-        <div class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div class="w-3/5 text-base	 text-gray-700 flex uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table class="w-3/5 text-base text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-base	 text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 
                     <tr>
                         <th>Nom</th>
@@ -66,14 +66,16 @@ $req = mysqli_query($conn, $sql);
                 </thead>
                 <tbody>
                     <?php
+                    $sql = "SELECT * from plante_panier JOIN plante JOIN categorie where plante_panier.id_plante = plante.id AND plante.id_cat = categorie.id AND plante_panier.id_panier = $idpanier";
+                    $req = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_array($req)) {
 
                         ?>
 
                         <tr>
-                            <th>
+                            <td>
                                 <?php echo $row['5'] ?>
-                            </th>
+                            </td>
                             <td>
                                 <?php echo $row['13'] ?>
                             </td>
@@ -81,12 +83,13 @@ $req = mysqli_query($conn, $sql);
                                 <?php echo $row['9']?>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
             <?php }
                     ?>
+                    </tbody>
+                </table>
 
         </div>
+        
     </section>
 
 </body>
