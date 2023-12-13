@@ -8,7 +8,7 @@ if ($_SESSION['status'] != 'client') {
 }
 
 
-
+$i = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +23,8 @@ if ($_SESSION['status'] != 'client') {
         content="tailwind,tailwindcss,tailwind css,css,starter template,free template,store template, shop layout, minimal, monochrome, minimalistic, theme, nordic">
 
     <script src="https://cdn.tailwindcss.com"> </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/riva-dashboard.css">
+
 
 
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
@@ -58,7 +60,7 @@ if ($_SESSION['status'] != 'client') {
 
     <!--Nav-->
     <nav id="header" class="w-full z-30 top-0 py-1">
-        <div class="bg-lime-600 w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
+        <div class="bg-lime-600 w-full rounded-3xl container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
 
             <label for="menu-toggle" class="cursor-pointer md:hidden block">
                 <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -84,7 +86,7 @@ if ($_SESSION['status'] != 'client') {
                     <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24">
                         <circle fill="none" cx="12" cy="7" r="3" />
-                        <path
+                        <path   
                             d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
                     </svg>
                 </a>
@@ -98,34 +100,27 @@ if ($_SESSION['status'] != 'client') {
                 </div>
             </div>
     </nav>
-    <section>
-        
-    </section>
 
     <section class=" py-8">
 
         <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
-
-            <nav id="store" class="w-full z-30 top-0 px-6 py-1">
                 <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
-
-
 
                     <div class="filter" id="store-nav-content">
 
                         <form action="" method="post">
-                            <div>
+                            <div class="p-5">
                                 <input
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     type="text" name="searchinput" placeholder="Entrer un nom">
                                 <input
-                                    class="text-white bg-green-700 hover:bg-green-800 rounded-full text-sm px-5 py-2.5 text-center"
+                                    class="text-white bg-green-700 mt-1 hover:bg-green-800 rounded-full text-sm px-5 py-2.5 text-center"
                                     type="submit" name="Search" value="Search">
                             </div>
-                            <div class="selectclass">
+                            <div class="selectclass p-5">
                                 <a class="inline-block no-underline hover:text-black" href="#">
                                     <select name="select" id="category"
-                                        class="bg-gray-50 border border-gray-300 text text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        class="border border-gray-300 text text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         Select
                                         <?php
 
@@ -144,8 +139,8 @@ if ($_SESSION['status'] != 'client') {
                                 </a>
 
                                 <input
-                                    class="p-3 text-white bg-green-700 hover:bg-green-800 rounded-full text-sm px-5 py-2.5 text-center"
-                                    type="submit" value="Search" name="filter">
+                                    class="text-white bg-green-700 mt-1 hover:bg-green-800 rounded-full text-sm px-5 py-2.5 text-center"
+                                    type="submit" value="filter" name="filter">
                             </div>
                         </form>
                         <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
@@ -155,9 +150,10 @@ if ($_SESSION['status'] != 'client') {
 
                     </div>
                 </div>
-            </nav>
 
             <?php
+
+
             if (@$_POST['filter']) {
                 $catid = $_POST['select'];
                 $sqlshowcat = "SELECT * from plante where id_cat = $catid";
@@ -178,9 +174,9 @@ if ($_SESSION['status'] != 'client') {
                                 <p class="pt-1 text-gray-900">$
                                     <?php echo $showcat['Prix'] ?>
                                 </p>
-                                <input
-                                    class="w-full text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"
-                                    type="submit" name="ajoutpanier" value="Ajouter a votre panier">
+                                <a href="panier.php?id=<?php echo $rowstore['0'] ?>"
+                                class="w-3/5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center">Ajouter
+                                au panier</a>
                         </a>
                     </div>
                     <?php
@@ -188,7 +184,7 @@ if ($_SESSION['status'] != 'client') {
 
 
             }
-            if (@$_POST['Search']) {
+            else if (@$_POST['Search']) {
                 $input = $_POST['searchinput'];
                 $sql = "SELECT * from plante where nom like '%$input%'";
                 $reqsearch = mysqli_query($conn, $sql);
@@ -208,16 +204,16 @@ if ($_SESSION['status'] != 'client') {
                             <p class="pt-1 text-gray-900">$
                                 <?php echo $result['5'] ?>
                             </p>
-                            <input
-                                class="w-3/5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center"
-                                type="submit" name="ajoutpanier" value="Ajouter a votre panier">
+                            <a href="panier.php?id=<?php echo $result[0] ?>"
+                                class="w-3/5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center">Ajouter
+                                au panier</a>
                         </a>
                     </div>
                     <?php
                 }
 
-            } else {
-
+            }
+            else {
                 while ($rowstore = mysqli_fetch_row($resultstore)) {
 
                     ?>
@@ -246,7 +242,7 @@ if ($_SESSION['status'] != 'client') {
                     </div>
                     <?php
                 }
-
+                $i += 1;
             }
             ?>
 

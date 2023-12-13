@@ -76,6 +76,9 @@ FOREIGN KEY (id_panier) REFERENCES panier(id)
 
 ALTER TABLE `plante` ADD `img` VARCHAR(255) NOT NULL AFTER `id_cat`;
 
+ALTER TABLE `plante_panier` ADD `status` INT NOT NULL AFTER `qtt`;
+
+
 
 
 -- Remarque importante

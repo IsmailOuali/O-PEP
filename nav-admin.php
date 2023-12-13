@@ -1,4 +1,4 @@
-i
+
 <?php
 include 'config.php';
 ?>
@@ -10,6 +10,7 @@ include 'config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"> </script>
 
+
     <title>Admin panel</title>
 </head>
 
@@ -19,9 +20,11 @@ include 'config.php';
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
 
     <!-- page -->
-    <main class="min-h-screen w-full bg-gray-100 text-gray-700" x-data="layout">
+    <main class="min-h-screen w-full bg-[#4ABB29]-100 text-gray-700" x-data="layout">
         <!-- header page -->
-        <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2">
+
+        
+        <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-[#4ABB29] p-2">
             <!-- logo -->
             <div class="flex items-center space-x-2">
                 <button type="button" class="text-3xl" @click="asideOpen = !asideOpen"><i
@@ -40,7 +43,7 @@ include 'config.php';
 
         <div class="flex">
             <!-- aside -->
-            <aside class="flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2" style="height: 90.5vh"
+            <aside class="bg-[#4ABB29] flex w-72 flex-col space-y-2 border-r-2 border-gray-200  p-2" style="height: 90.5vh"
                 x-show="asideOpen">
                 <a href="#"
                     class="flex items-center space-x-1 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600">
@@ -68,21 +71,21 @@ include 'config.php';
             </aside>
 
             <!-- main content page -->
-            <div class="w-full p-4">
+            <div class="w-full text-center bg-[#79B068]">
                 <?php
                 $sqlcount = "SELECT COUNT(*) as total FROM users";
                 $reqcount = mysqli_query($conn, $sqlcount);
 
                 $total = mysqli_fetch_assoc($reqcount);
                 ?>
-                <div class="nbrclient ">
+                <div class="nbrclient block antialiased font-sans text-2xl leading-normal font-normal text-blue-gray-600">
                     <p>Nombre de client:</p><br>
-                    <p>
+                    <p class="text-2xl">
                         <?php echo $total['total'] ?>
                     </p>
 
                 </div>
-                <div class="nbrplantes">
+                <div class="nbrplantes text-2xl">
 
                     <?php
                     $sqlcountp = "SELECT COUNT(*) as totalp FROM plante";
