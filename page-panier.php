@@ -107,7 +107,8 @@ $req = mysqli_query($conn, $sql);
                                     href="commande.php?id=<?php echo $row['0']?>">|| Commander</a>
                             </td>
                         </tr>
-                    <?php }
+                    <?php 
+                    }
                     ?>
                 </tbody>
             </table>
